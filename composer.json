@@ -1,0 +1,22 @@
+{
+    "name": "boostsales/module-extracheckoutaddressfields",
+    "description": "",
+    "type": "magento2-module",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "email": "info@boostsales.eu",
+            "name": "Boostsales"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Boostsales\\ExtraCheckoutAddressFields\\": ""
+        }
+    }
+}
