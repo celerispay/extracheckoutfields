@@ -59,7 +59,7 @@ class InstallData implements InstallDataInterface
             [
                 'label' => 'department',
                 'input' => 'select',
-                'type' => 'varchar',
+                'type' => 'int',
                 'required' => false,
                 'position' => 333,
                 'visible' => true,
@@ -69,10 +69,9 @@ class InstallData implements InstallDataInterface
                 'is_filterable_in_grid' => false,
                 'is_searchable_in_grid' => false,
                 'backend' => '',
-                'source' => 'Boostsales\ExtraCheckoutAddressFields\Model\Source\Departments',
+                'source' => \Boostsales\ExtraCheckoutAddressFields\Model\Attribute\Source\Departments::class,
             ]
         );
-
 
         $attribute = $customerSetup->getEavConfig()
             ->getAttribute(
