@@ -172,38 +172,32 @@ class LayoutProcessor implements LayoutProcessorInterface
         if (isset($this->formElementMap[$inputType])) {
             $inputType = $this->formElementMap[$inputType];
         }
-        if($this->websiteId == 3){
-            $visible = true;
-        }else {
+        $visible = true;
+        if($attributeCode == "department" && $this->websiteId == 2){
             $visible = false;
         }
+        // if($attributeCode == "dept_extra_info"){
+        //     $visible = true;
+        // }
+        // if($this->websiteId == 3){
+        //     $visible = true;
+        // }else {
+        //     $visible = false;
+        // }
         return [
             'component' => 'Magento_Ui/js/form/element/select',
             'config' => [
                 'customScope' => $scope,
                 'template' => 'ui/form/field',
-                'elementTmpl' => 'ui/form/element/select'
+                'elementTmpl' => 'ui/form/element/' . $inputType
             ],
             'dataScope' => $scope . '.' . $attributeCode,
             'sortOrder' => $attribute->getSortOrder(),
             'visible' => $visible,
             'provider' => 'checkoutProvider',
             'validation' => $attribute->getValidationRules(),
-            'options' => $attribute->getOptions(),
-            'label' => __('Departments'),
-            'options' => [
-                [
-                    ['label' => __('Select Department'), 'value' => ''],
-                    ['label' => __('Logistics'), 'value' => 'logistics'],
-                    ['label' => __('Healthcare'), 'value' => 'healthcare'],
-                    ['label' => __('Automotive'), 'value' => 'automotive'],
-                    ['label' => __('Industrial Automation'), 'value' => 'industrial automation'],
-                    ['label' => __('Machine and System'), 'value' => 'machine and system'],
-                    ['label' => __('Energy and Utilites'), 'value' => 'energy and utilities'],
-                    ['label' => __('ICT BV'), 'value' => 'ict bv'],
-                    ['label' => __('ICT NV'), 'value' => 'ict nv']
-                ]
-            ]
+            'options' => [$attribute->getOptions()],
+            'label' => __($attribute->getStoreLabel()),
         ];
     }
 }

@@ -52,7 +52,6 @@ class InstallData implements InstallDataInterface
         ModuleContextInterface $context
     ) {
         $customerSetup = $this->customerSetupFactory->create(['setup' => $setup]);
-
         $customerSetup->addAttribute(
             \Magento\Customer\Api\AddressMetadataInterface::ENTITY_TYPE_ADDRESS,
             'department',
@@ -64,12 +63,51 @@ class InstallData implements InstallDataInterface
                 'position' => 333,
                 'visible' => true,
                 'system' => false,
+                'is_user_defined' => true,
                 'is_used_in_grid' => false,
                 'is_visible_in_grid' => false,
                 'is_filterable_in_grid' => false,
                 'is_searchable_in_grid' => false,
                 'backend' => '',
                 'source' => \Boostsales\ExtraCheckoutAddressFields\Model\Attribute\Source\Departments::class,
+            ]
+        );
+
+        $customerSetup->addAttribute(
+            \Magento\Customer\Api\AddressMetadataInterface::ENTITY_TYPE_ADDRESS,
+            'dept_extra_info',
+            [
+                'label' => 'Department/Extra address information',
+                'input' => 'text',
+                'type' => 'varchar',
+                'required' => false,
+                'position' => 50,
+                'visible' => true,
+                'system' => false,
+                'is_user_defined' => true,
+                'is_used_in_grid' => false,
+                'is_visible_in_grid' => false,
+                'is_filterable_in_grid' => false,
+                'is_searchable_in_grid' => false,
+            ]
+        );
+
+        $customerSetup->addAttribute(
+            \Magento\Customer\Api\AddressMetadataInterface::ENTITY_TYPE_ADDRESS,
+            'invoice_email',
+            [
+                'label' => 'Invoice Email',
+                'input' => 'text',
+                'type' => 'varchar',
+                'required' => false,
+                'position' => 200,
+                'visible' => true,
+                'system' => false,
+                'is_user_defined' => true,
+                'is_used_in_grid' => false,
+                'is_visible_in_grid' => false,
+                'is_filterable_in_grid' => false,
+                'is_searchable_in_grid' => false,
             ]
         );
 
@@ -82,9 +120,37 @@ class InstallData implements InstallDataInterface
                 'used_in_forms' => [
                     'customer_address_edit',
                     'customer_register_address',
-                    'adminhtml_customer_addresss',
+                    'adminhtml_customer_address',
                 ]
             ]);
+        $attribute->save();
+
+        $attribute = $customerSetup->getEavConfig()
+        ->getAttribute(
+            \Magento\Customer\Api\AddressMetadataInterface::ENTITY_TYPE_ADDRESS,
+            'dept_extra_info'
+        )
+        ->addData([
+            'used_in_forms' => [
+                'customer_address_edit',
+                'customer_register_address',
+                'adminhtml_customer_address',
+            ]
+        ]);
+        $attribute->save();
+
+        $attribute = $customerSetup->getEavConfig()
+        ->getAttribute(
+            \Magento\Customer\Api\AddressMetadataInterface::ENTITY_TYPE_ADDRESS,
+            'invoice_email'
+        )
+        ->addData([
+            'used_in_forms' => [
+                'customer_address_edit',
+                'customer_register_address',
+                'adminhtml_customer_address',
+            ]
+        ]);
         $attribute->save();
     }
 }

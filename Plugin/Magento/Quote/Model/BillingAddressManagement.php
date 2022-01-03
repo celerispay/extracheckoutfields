@@ -47,9 +47,13 @@ class BillingAddressManagement
     ) {
         $extAttributes = $address->getExtensionAttributes();
         $this->logger->info("extension value billing:",["value" => $extAttributes->getDepartment()]);
+        $this->logger->info("extension value billng:",["value" => $extAttributes->getDeptExtraInfo()]);
+        $this->logger->info("extension value billng:",["value" => $extAttributes->getInvoiceEmail()]);
         if (!empty($extAttributes)) {
             try{
                 $address->setDepartment($extAttributes->getDepartment());
+                $address->setDeptExtraInfo($extAttributes->getDeptExtraInfo());
+                $address->setInvoiceEmail($extAttributes->getInvoiceEmail());
             }catch(\Exception $e){
                 $this->logger->critical($e->getMessage());
             }

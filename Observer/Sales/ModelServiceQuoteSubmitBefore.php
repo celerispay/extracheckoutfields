@@ -61,11 +61,22 @@ class ModelServiceQuoteSubmitBefore implements ObserverInterface
 
         $billDepartment = $quote->getBillingAddress()->getDepartment();
         $shipDepartment = $quote->getShippingAddress()->getDepartment();
+        $billDeptExtra = $quote->getBillingAddress()->getDeptExtraInfo();
+        $shipDeptExtra = $quote->getShippingAddress()->getDeptExtraInfo();
+        $shipInvoiceEmail = $quote->getShippingAddress()->getInvoiceEmail();
+        $billInvoiceEmail = $quote->getBillingAddress()->getInvoiceEmail();
+
         $this->logger->info("extension attribute is:",["shipping" => $shipDepartment,"billing" => $billDepartment]);
+        $this->logger->info("extension attribute is:",["shipping" => $shipDeptExtra, "billing" => $billDeptExtra]);
+        $this->logger->info("extension attribute is:",["shipping" => $shipInvoiceEmail, "billing" => $billInvoiceEmail]);
 
         try {
             $order->getBillingAddress()->setDepartment($billDepartment);
             $order->getShippingAddress()->setDepartment($shipDepartment);
+            $order->getBillingAddress()->setDeptExtraInfo($billDeptExtra);
+            $order->getShippingAddress()->setDeptExtraInfo($shipDeptExtra);
+            $order->getShippingAddress()->setInvoiceEmail($shipInvoiceEmail);
+            $order->getBillingAddress()->setInvoiceEmail($billInvoiceEmail);
         } catch (\Exception $e) {
             $this->logger->critical($e->getMessage());
         }

@@ -46,9 +46,13 @@ class ShippingAddressManagement
     ) {
         $extAttributes = $address->getExtensionAttributes();
         $this->logger->info("extension value shipping:",["value" => $extAttributes->getDepartment()]);
+        $this->logger->info("extension value shipping:",["value" => $extAttributes->getDeptExtraInfo()]);
+        $this->logger->info("extension value shipping:",["value" => $extAttributes->getInvoiceEmail()]);
         if (!empty($extAttributes)) {
          try{
              $address->setDepartment($extAttributes->getDepartment());
+             $address->setDeptExtraInfo($extAttributes->getDeptExtraInfo());
+             $address->setInvoiceEmail($extAttributes->getInvoiceEmail());
          }catch(\Exception $e){
             $this->logger->critical($e->getMessage());
          }

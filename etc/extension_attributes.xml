@@ -3,4 +3,10 @@
     <extension_attributes for="Magento\Quote\Api\Data\AddressInterface">
         <attribute code="department" type="string" />
     </extension_attributes>
+    <extension_attributes for="Magento\Quote\Api\Data\AddressInterface">
+        <attribute code="dept_extra_info" type="string"/>
+    </extension_attributes>
+    <extension_attributes for="Magento\Quote\Api\Data\AddressInterface">
+        <attribute code="invoice_email" type="string"/>
+    </extension_attributes>
 </config>

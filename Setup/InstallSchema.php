@@ -45,6 +45,26 @@ class InstallSchema implements InstallSchemaInterface
         );
 
         $setup->getConnection()->addColumn(
+            $setup->getTable('quote_address'),
+            'dept_extra_info',
+            [
+                'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                'length' => 255,
+                'comment' => 'Extra department info'
+            ]
+        );
+
+        $setup->getConnection()->addColumn(
+            $setup->getTable('quote_address'),
+            'invoice_email',
+            [
+                'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                'length' => 255,
+                'comment' => 'Invoice email'
+            ]
+        );
+
+        $setup->getConnection()->addColumn(
             $setup->getTable('sales_order_address'),
             'department',
             [
@@ -53,5 +73,26 @@ class InstallSchema implements InstallSchemaInterface
                 'comment' => 'Department'
             ]
         );
+
+        $setup->getConnection()->addColumn(
+            $setup->getTable('sales_order_address'),
+            'dept_extra_info',
+            [
+                'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                'length' => 255,
+                'comment' => 'Extra department info'
+            ]
+        );
+
+        $setup->getConnection()->addColumn(
+            $setup->getTable('sales_order_address'),
+            'invoice_email',
+            [
+                'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                'length' => 255,
+                'comment' => 'Invoice email'
+            ]
+        );
+
     }
 }
